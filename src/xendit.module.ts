@@ -7,6 +7,10 @@ import { Xendit } from 'xendit-node';
 @Module({
     providers: [
         XenditService,
+        {
+            provide: XenditConfig.INSTANCE,
+            useValue: Xendit,
+        },
     ],
     exports: [XenditService],
 })
@@ -15,10 +19,6 @@ export class XenditModule {
         return {
             module: XenditModule,
             providers: [
-                {
-                    provide: XenditConfig.OPTIONS,
-                    useValue: options,
-                },
                 {
                     provide: XenditConfig.INSTANCE,
                     useValue: new Xendit(options),
@@ -38,6 +38,7 @@ export class XenditModule {
                     useFactory: (options: XenditModuleOptions) => new Xendit(options),
                     inject: [XenditConfig.OPTIONS],
                 },
+                ...(options.extraProviders || []),
             ],
         };
     }
