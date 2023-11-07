@@ -4,11 +4,20 @@
         "json",
         "ts"
     ],
-    "rootDir": "src",
     "testRegex": ".spec.ts$",
     "transform": {
         "^.+\\.(t|j)s$": "ts-jest"
     },
-    "coverageDirectory": "../coverage",
+    "collectCoverageFrom": [
+        "**/*.(t|j)s",
+        "!**/*module.ts",
+        "!**/enum/*",
+        "!**/interface/*",
+        "!**/index.ts"
+    ],
+    "roots": [
+        "<rootDir>/src/"
+    ],
+    "coverageDirectory": "./coverage",
     "testEnvironment": "node"
 }
